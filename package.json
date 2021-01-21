@@ -1,5 +1,5 @@
 {
-  "name": "@mana-ui/dependency-resolve-plugin",
+  "name": "@mana-ui/dev-resolve",
   "version": "0.1.0",
   "description": "webpack plugin for resolving dependency in development",
   "main": "index.js",
