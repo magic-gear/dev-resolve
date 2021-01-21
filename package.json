@@ -1,0 +1,11 @@
+{
+  "name": "@mana-ui/dependency-resolve-plugin",
+  "version": "0.1.0",
+  "description": "webpack plugin for resolving dependency in development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
