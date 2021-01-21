@@ -1,19 +1,13 @@
 /* eslint-env node */
 const path = require("path")
-const child_process = require("child_process")
+const list = require('../lib/list')
+const modulesPath = require('../lib/modulesPath')
 
 class DependencyResolvePlugin {
   constructor(options) {
     this.options = options
-    const info = JSON.parse(child_process.execSync('npm ls --global=true --depth=0 --link=true --json=true --long=true').toString())
     this.links = []
-    for (const json of Object.values(info.dependencies)) {
-        this.links.push(json.link)
-    }
-    this.linkedFolder = path.resolve(
-      child_process.execSync("npm prefix -g").toString().trim(),
-      "lib/node_modules"
-    )
+    list(({dest}) => this.links.push(dest))
   }
   apply(compiler) {
     compiler.hooks.afterPlugins.tap("dependency-resolve", (compiler) => {
@@ -24,7 +18,7 @@ class DependencyResolvePlugin {
           lib
         )
       }
-      compiler.options.resolve.modules.unshift(this.linkedFolder)
+      compiler.options.resolve.modules.unshift(modulesPath)
       compiler.options.module.rules.forEach(rule => {
         rule.exclude = [rule.exclude, filename => {
           try {

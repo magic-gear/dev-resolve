@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "webpack plugin for resolving dependency in development",
   "main": "plugin/index.js",
+  "bin": "./bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
