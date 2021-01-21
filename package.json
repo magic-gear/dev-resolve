@@ -2,7 +2,7 @@
   "name": "@mana-ui/dev-resolve",
   "version": "0.1.0",
   "description": "webpack plugin for resolving dependency in development",
-  "main": "index.js",
+  "main": "plugin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
