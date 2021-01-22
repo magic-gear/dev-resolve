@@ -32,16 +32,14 @@ class DependencyResolvePlugin {
       })
       compiler.options.module.rules.unshift({
         test: /\.js$/,
-        use: {
+        use: [{
           loader: 'babel-loader',
           options: {
             links: this.links,
             customize: path.join(__dirname, './custom-loader')
           },
-          include: filename => {
-            return this.links.some(link => filename.includes(link))
-          }
-        },
+        }],
+        include: filename => this.links.some(link => filename.includes(link))
       })
     })
   }
