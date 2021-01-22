@@ -32,6 +32,10 @@ class DependencyResolvePlugin {
       })
       compiler.options.module.rules.unshift({
         test: /\.js$/,
+        exclude: [
+          /node_modules[\\\/]core-js/,
+          /node_modules[\\\/]@babel[\\\/]runtime/,
+        ],
         use: [{
           loader: 'babel-loader',
           options: {
