@@ -14,7 +14,7 @@ The goal of the webpack plugin is to make you develop and test your self-develop
 ## Install
 
 ```bash
-npm add -D @mana-ui/dev-resolve
+npm add -D @magic-gear/dev-resolve
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ This create a link in a global `node_modules` like directory, make the plugin in
 
 ```javascript
 // webpack.config.js
-const DevResolvePlugin = require('@mana-ui/dev-resolve')
+const DevResolvePlugin = require('@magic-gear/dev-resolve')
 
 module.exports = {
   plugins: [new DevResolvePlugin({common: ['react']}), ...other plugins],
