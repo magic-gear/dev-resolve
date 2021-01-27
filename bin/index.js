@@ -21,7 +21,7 @@ const link = async () => {
   const { dir } = path.parse(source);
   await fs.mkdir(dir, { recursive: true });
   try {
-    await fs.symlink(dest, source);
+    await fs.symlink(dest, source, 'junction');
   } catch (e) {
     if (e.code === "EEXIST") {
       throw `${package.name} already linked to ${await fs.readlink(source)}`;
