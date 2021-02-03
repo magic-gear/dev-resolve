@@ -7,9 +7,14 @@ class DependencyResolvePlugin {
   constructor(options) {
     this.options = options
     this.links = []
-    list(({dest}) => this.links.push(dest))
+    list(({dest}) => this.links.push(dest)).catch(error => {
+      if (error.code !== 'ENOENT') {
+        throw error
+      }
+    })
   }
   apply(compiler) {
+    if (this.links.length > 0)
     compiler.hooks.afterPlugins.tap("dependency-resolve", (compiler) => {
       for (const lib of this.options.common) {
         compiler.options.resolve.alias[lib] = path.resolve(
