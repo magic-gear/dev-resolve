@@ -46,8 +46,19 @@ try {
       unlink();
       break;
     case "list":
-        list(({pkgName, dest}) => console.log(`${pkgName} -> ${dest}`))
-        break
+      (async () => {
+        try {
+          await fs.stat(modulesPath)
+          list(({pkgName, dest}) => console.log(`${pkgName} -> ${dest}`))
+        } catch(e) {
+          if (e.code === 'ENOENT' && e.path === modulesPath) {
+            console.log('No packages linked!')
+          } else {
+            throw e
+          }
+        }
+      })()
+      break
     default:
       console.log(`
 Usage: dev-resolve <command>
