@@ -39,6 +39,9 @@ module.exports = {
   ...other configs
 }
 ```
+
+This plugin hooks into webpack by watchRun hook, so it only works with dev-server.
+
 ## Options
 
-- `common`: Default `[]`. Common dependency that should resolve from app node_modules.
+- `common`: Default `[]`. Common dependency that should resolve from app node_modules. It's useful when some peer dependencies should be resolved to the same module, such as react, react-jss.
