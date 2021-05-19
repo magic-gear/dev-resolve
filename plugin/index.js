@@ -5,7 +5,7 @@ const modulesPath = require('../lib/modulesPath')
 
 class DependencyResolvePlugin {
   constructor(options) {
-    this.options = options
+    this.options = options ?? {common: []}
     this.links = []
   }
   apply(compiler) {
@@ -18,7 +18,9 @@ class DependencyResolvePlugin {
         }
       })
       for (const lib of this.options.common) {
-        compiler.options.resolve.alias[lib] = path.resolve(
+          const {resolve} = compiler.options
+          resolve.alias = resolve.alias ?? {}
+        resolve.alias[lib] = path.resolve(
           compiler.context,
           "node_modules",
           lib
