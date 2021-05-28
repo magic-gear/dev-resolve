@@ -3,14 +3,14 @@ const path = require("path")
 const list = require('../lib/list')
 const modulesPath = require('../lib/modulesPath')
 
-class DependencyResolvePlugin {
+class DevResolvePlugin {
   constructor(options) {
     this.options = options ?? {common: []}
     this.links = []
     this.applied = false
   }
   apply(compiler) {
-    compiler.hooks.watchRun.tapPromise("dependency-resolve", async (compiler) => {
+    compiler.hooks.watchRun.tapPromise("DevResolvePlugin", async (compiler) => {
         if (this.applied) return
       await list(({dest}) => {
         this.links.push(dest)
@@ -60,4 +60,4 @@ class DependencyResolvePlugin {
   }
 }
 
-module.exports = DependencyResolvePlugin
+module.exports = DevResolvePlugin
