@@ -7,9 +7,11 @@ class DependencyResolvePlugin {
   constructor(options) {
     this.options = options ?? {common: []}
     this.links = []
+    this.applied = false
   }
   apply(compiler) {
     compiler.hooks.watchRun.tapPromise("dependency-resolve", async (compiler) => {
+        if (this.applied) return
       await list(({dest}) => {
         this.links.push(dest)
       }).catch(error => {
@@ -53,6 +55,7 @@ class DependencyResolvePlugin {
         }],
         include: filename => this.links.some(link => filename.includes(link))
       })
+      this.applied = true
     })
   }
 }
