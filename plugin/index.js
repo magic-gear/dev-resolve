@@ -5,7 +5,7 @@ const modulesPath = require("../lib/modulesPath");
 
 class DevResolvePlugin {
   constructor(options) {
-    this.options = options ?? { common: [] };
+    this.options = options || { common: [] };
     this.links = [];
     this.applied = false;
   }
@@ -23,7 +23,7 @@ class DevResolvePlugin {
       });
       for (const lib of this.options.common) {
         const { resolve } = compiler.options;
-        resolve.alias = resolve.alias ?? {};
+        resolve.alias = resolve.alias || {};
         resolve.alias[lib] = path.resolve(
           compiler.context,
           "node_modules",
