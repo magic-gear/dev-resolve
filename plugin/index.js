@@ -3,6 +3,8 @@ const path = require("path");
 const list = require("../lib/list");
 const modulesPath = require("../lib/modulesPath");
 
+const test = /\.js$/
+
 class DevResolvePlugin {
   constructor(options) {
     this.options = options || { common: [] };
@@ -31,21 +33,8 @@ class DevResolvePlugin {
         );
       }
       compiler.options.resolve.modules.unshift(modulesPath);
-      compiler.options.module.rules.forEach((rule) => {
-        rule.exclude = [
-          rule.exclude,
-          (filename) => {
-            try {
-              return this.links.some((link) => filename.includes(link));
-            } catch (e) {
-              console.log(e);
-              throw e;
-            }
-          },
-        ].filter(Boolean);
-      });
       compiler.options.module.rules.unshift({
-        test: /\.js$/,
+        test,
         exclude: [
           /node_modules[\\\/]core-js/,
           /node_modules[\\\/]@babel[\\\/]runtime/,
