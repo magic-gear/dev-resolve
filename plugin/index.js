@@ -6,8 +6,7 @@ const modulesPath = require("../lib/modulesPath");
 const test = /\.js$/
 
 class DevResolvePlugin {
-  constructor(options) {
-    this.options = options || { common: [] };
+  constructor() {
     this.links = [];
     this.applied = false;
   }
@@ -23,7 +22,13 @@ class DevResolvePlugin {
           throw error;
         }
       });
-      for (const lib of this.options.common) {
+      let peers = []
+      for (const link of this.links) {
+        const {peerDependencies = {}} = require(path.resolve(link, 'package.json'))
+        peers = peers.concat(Object.keys(peerDependencies))
+      }
+
+      for (const lib of new Set(peers)) {
         const { resolve } = compiler.options;
         resolve.alias = resolve.alias || {};
         resolve.alias[lib] = path.resolve(
