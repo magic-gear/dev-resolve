@@ -23,7 +23,7 @@ npm add -D @magic-gear/dev-resolve
 
 ```bash
 cd /path/to/your/package
-npx dev-resolve link
+npx @magic-gear/dev-resolve link
 ```
 
 This create a link in a global `node_modules` like directory, make the plugin in app can find the dependencies.
@@ -35,13 +35,9 @@ This create a link in a global `node_modules` like directory, make the plugin in
 const DevResolvePlugin = require('@magic-gear/dev-resolve')
 
 module.exports = {
-  plugins: [new DevResolvePlugin({common: ['react']}), ...other plugins],
+  plugins: [new DevResolvePlugin(), ...other plugins],
   ...other configs
 }
 ```
 
 This plugin hooks into webpack by watchRun hook, so it only works with dev-server.
-
-## Options
-
-- `common`: Default `[]`. Common dependency that should resolve from app node_modules. It's useful when some peer dependencies should be resolved to the same module, such as react, react-jss.
