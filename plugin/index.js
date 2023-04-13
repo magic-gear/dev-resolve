@@ -3,7 +3,7 @@ const path = require("path");
 const list = require("../lib/list");
 const modulesPath = require("../lib/modulesPath");
 
-const test = /\.js$/
+const test = /\.jsx?$/
 
 class DevResolvePlugin {
   constructor() {
